@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstring>
+#include <locale>
 #include <string>
 
 using namespace std;
@@ -13,13 +13,26 @@ string reverse(string str) {
   return str;
 }
 
+string noSpaces(string str) {
+  locale loc;
+  for (int i = 0; i < str.length(); i++) {
+    if (str[i] == ' ') {
+      str.erase(i, 1);
+    }
+    else {
+      str[i] = tolower(str[i], loc);
+    }
+  }
+  return str;
+}
+
 int main()
 {
   string str;
   cout << "Please give a string to check if its a palindrome: ";
-  cin >> str;
-  cin.ignore();
+  getline(cin, str);
 
+  str = noSpaces(str);
   string cpy = str;
   str = reverse(str);
 
